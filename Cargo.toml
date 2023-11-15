@@ -1,5 +1,5 @@
 [package]
-name = "reqwest-eventsource"
+name = "reqwest-eventsource-wasi"
 version = "0.5.0"
 authors = ["Julian Popescu <jpopesculian@gmail.com>"]
 edition = "2018"
@@ -13,9 +13,13 @@ description = "Helper to build an Eventsource using reqwest"
 keywords = ["sse", "eventsource", "reqwest", "stream", "event"]
 categories = ["web-programming::http-client", "no-std", "parsing", "asynchronous"]
 
+[lib]
+name = "reqwest_eventsource"
+path = "src/lib.rs"
+
 [dependencies]
 eventsource-stream = "0.2.3"
-reqwest = { version = "0.11", default-features = false, features = ["stream"] }
+reqwest_wasi = { version = "0.11.16", default-features = false, features = ["stream", "wasmedge-tls"] }
 futures-core = "0.3.5"
 pin-project-lite = "0.2.8"
 nom = "7.1.0"

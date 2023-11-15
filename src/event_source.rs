@@ -3,15 +3,15 @@ use crate::retry::{RetryPolicy, DEFAULT_RETRY};
 use core::pin::Pin;
 use eventsource_stream::Eventsource;
 pub use eventsource_stream::{Event as MessageEvent, EventStreamError};
-#[cfg(not(target_arch = "wasm32"))]
+// #[cfg(not(target_arch = "wasm32"))]
 use futures_core::future::BoxFuture;
 use futures_core::future::Future;
-#[cfg(target_arch = "wasm32")]
-use futures_core::future::LocalBoxFuture;
-#[cfg(not(target_arch = "wasm32"))]
+// #[cfg(target_arch = "wasm32")]
+// use futures_core::future::LocalBoxFuture;
+// #[cfg(not(target_arch = "wasm32"))]
 use futures_core::stream::BoxStream;
-#[cfg(target_arch = "wasm32")]
-use futures_core::stream::LocalBoxStream;
+// #[cfg(target_arch = "wasm32")]
+// use futures_core::stream::LocalBoxStream;
 use futures_core::stream::Stream;
 use futures_core::task::{Context, Poll};
 use futures_timer::Delay;
@@ -20,15 +20,15 @@ use reqwest::header::{HeaderName, HeaderValue};
 use reqwest::{Error as ReqwestError, IntoUrl, RequestBuilder, Response, StatusCode};
 use std::time::Duration;
 
-#[cfg(not(target_arch = "wasm32"))]
+// #[cfg(not(target_arch = "wasm32"))]
 type ResponseFuture = BoxFuture<'static, Result<Response, ReqwestError>>;
-#[cfg(target_arch = "wasm32")]
-type ResponseFuture = LocalBoxFuture<'static, Result<Response, ReqwestError>>;
+// #[cfg(target_arch = "wasm32")]
+// type ResponseFuture = LocalBoxFuture<'static, Result<Response, ReqwestError>>;
 
-#[cfg(not(target_arch = "wasm32"))]
+// #[cfg(not(target_arch = "wasm32"))]
 type EventStream = BoxStream<'static, Result<MessageEvent, EventStreamError<ReqwestError>>>;
-#[cfg(target_arch = "wasm32")]
-type EventStream = LocalBoxStream<'static, Result<MessageEvent, EventStreamError<ReqwestError>>>;
+// #[cfg(target_arch = "wasm32")]
+// type EventStream = LocalBoxStream<'static, Result<MessageEvent, EventStreamError<ReqwestError>>>;
 
 type BoxedRetry = Box<dyn RetryPolicy + Send + Unpin + 'static>;
 
